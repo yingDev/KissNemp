@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>KissNemp</title>
+    <link rel="stylesheet" href="./mainWindowStyle.css" />
+    <script>
+      var remote = require('remote');
+      const ipc = require('electron').ipcRenderer;
+      var browserWindow = remote.getCurrentWindow();
+      var webView;
+      var isMini = false;
+
+      var playControl = {};
+
+      ipc.on('playControl', (e, msg)=>
+      {
+          webview.send('playControl', msg);
+      });
+
+      ipc.on('windowControl', (e, msg)=>
+      {
+        if(msg == 'showMain')
+        {
+          browserWindow.show();
+          if(isMini)
+          {
+            toggleMiniMode();
+          }
+        }
+      });
+
+      function toggleMiniMode()
+      {
+        if(isMini)
+        {
+          browserWindow.setSize(982, 600);
+          browserWindow.setAlwaysOnTop(false);
+	  browserWindow.setMinimumSize(982, 600);
+        }else 
+        {
+
+          browserWindow.setSize(350, 100);
+	  browserWindow.setMaximumSize(350, 100);
+          browserWindow.setAlwaysOnTop(true);
+        }
+
+	document.getElementById("title-text").style.width = isMini ? "900px" : "278px";	
+
+        document.getElementById("btn-minimize").style.display =  isMini ?  "inherit" : "none";
+        webview.send('windowControl', 'toggleMiniMode');
+
+
+        isMini = !isMini;
+
+      }
+    </script>
+
+  </head>
+  <body>
+    <div id="title-bar">
+      <div id="title-text"></div>
+      <ul id="window-btns">
+	<li onclick="browserWindow.close();" style="background:rgba(255, 60, 60, 0.5);">x</li>
+        <li onclick="toggleMiniMode();" style="background:rgba(80, 180, 255, 0.5);">=</li>
+        <li id="btn-minimize" onclick="browserWindow.minimize()" style="background:rgba(255,255,255, 0.5);">_</li>
+      </ul>
+    </div>
+
+    <webview style="padding-right:15px;" id="webView" preload="hack.js" src="http://music.163.com/#/my"/>
+    <script type="text/javascript">
+    webview = document.getElementById("webView");
+    webview.addEventListener("dom-ready", () =>
+    {
+      //webview.openDevTools();
+
+
+      
+    });
+    </script>
+
+
+  </body>
+</html>

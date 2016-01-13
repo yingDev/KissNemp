@@ -1,0 +1,23 @@
+{
+  "name": "KissNemp",
+  "version": "1.0.0",
+  "description": "'Kiss it Simple & Stupid' Netease Music Player",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  }
+}
