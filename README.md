@@ -1,3 +1,5 @@
+![](https://raw.githubusercontent.com/yingDev/KissNemp/master/screenShots/min.jpg)
+
 # KissNemp
 
 `简单粗暴`版的网易云音乐播放器 (for Linux)
