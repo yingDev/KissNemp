@@ -30,7 +30,7 @@ function createTray()
 {
     appIcon = new Tray(__dirname + '/163Music.png');
     var contextMenu = Menu.buildFromTemplate([
-      { label: '⏯  Play / Pause', click: () => { playControl('playPause'); } },
+      { label: '⏯ Play / Pause', click: () => { playControl('playPause'); } },
       { label: '⏩ Next', click: () => { playControl('next'); } },
       { label: '⏪ Previous', click: () => { playControl('previous'); } },
       { type: 'separator' },
